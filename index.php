@@ -67,7 +67,7 @@
 
 	<footer>
 		<p>All info found on this page is used with permission of &copy; CrunchBase</p>
-		<a href="" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+		<a href="https://github.com/platypause/startup_map" target="_blank"><i class="fa fa-github fa-2x"></i></a>
 	</footer>
 
 	<!-- MAIN SCRIPTS / JQUERY, LEAFLET AND MAP SCRITPS -->
