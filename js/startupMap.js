@@ -8,16 +8,19 @@ var CartoDB_DarkMatter = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/
 
 map.addLayer(CartoDB_DarkMatter);
 
+// COLOR SCHEME FOR MARKERS
+// ['#f0f9e8','#bae4bc','#7bccc4','#43a2ca','#0868ac']
+
 // global variables for layer controls
 var startupsUSGeoJSON;
 
 function getColor(d) {
-    return d > 70000000 ? '#034e7b' :
-           d > 60000000  ? '#045a8d' :
-           d > 50000000  ? '#2b8cbe' :
-           d > 40000000  ? '#74a9cf' :
-           d > 30000000  ? '#a6bddb' :
-           d > 20000000   ? '#d0d1e6' :
+    return d > 10000000000 ? '#034e7b' :
+           d > 1000000000  ? '#045a8d' :
+           d > 500000000  ? '#2b8cbe' :
+           d > 100000000  ? '#74a9cf' :
+           d > 50000000  ? '#a6bddb' :
+           d > 5000000   ? '#d0d1e6' :
                       '#f1eef6';
 }
 
@@ -28,16 +31,20 @@ $.getJSON("geojson/startupsus.geojson", function (data) {
 	var startupPointToLayer = function (feature, latlng){
 
 		var startupMarker = L.circle(latlng, 30000, {
-			stroke: false,
-			fillColor: '#00ffff', 
-			fillOpacity: 0.7
+			width: feature.properties.funding_total_usd,
+			fillColor: getColor(feature.properties.funding_total_usd), 
+			fillOpacity: 0.8
 		});
 		return startupMarker
-
 	    }
 
-	var startupClick = function (feature, layer) {
-		layer.bindPopup("<strong>Name: </strong><br />" + feature.properties.name + "<br /><strong>Funding: </strong>" + "$" + feature.properties.funding_total_usd + " USD");
+	var startupHover = function (feature, layer) {
+		layer.bindPopup("<strong>Name: </strong><br />" + feature.properties.name + "<br /><strong>Industry: </strong>" + feature.properties.category_list +
+						"<br /><strong>Funding: </strong>" + "$" + feature.properties.funding_total_usd + " USD" 
+						+ "<br /><strong>First Funding at: </strong>" + feature.properties.first_funding_at.substring(0, 10) +
+						"<br /><strong>Last Funding at: </strong>" + feature.properties.last_funding_at.substring(0, 10) +
+						"<br /><strong>Funding Rounds: </strong>" + feature.properties.funding_rounds
+						);
 		layer.on('mouseover', function (e) {
 		            this.openPopup();
 		        });
@@ -48,7 +55,7 @@ $.getJSON("geojson/startupsus.geojson", function (data) {
 
 	startupUSGeoJson = L.geoJson(startupPoints, {
 		pointToLayer: startupPointToLayer, 
-		onEachFeature: startupClick
+		onEachFeature: startupHover
 	}).addTo(map);
 });
 
