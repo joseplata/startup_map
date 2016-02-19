@@ -15,13 +15,12 @@ map.addLayer(CartoDB_DarkMatter);
 var startupsUSGeoJSON;
 
 function getColor(d) {
-    return d > 10000000000 ? '#034e7b' :
-           d > 100000000  ? '#045a8d' :
-           d > 50000000  ? '#2b8cbe' :
-           d > 10000000  ? '#74a9cf' :
-           d > 5000000  ? '#a6bddb' :
-           d > 1000000   ? '#d0d1e6' :
-                      '#f1eef6';
+    return d > 500000000 ? '#7fff00' :
+           d > 100000000 ? '#b9ff00' :
+           d > 500000000  ? '#e5ff00' :
+           d > 15000000  ? '#e5a100' :
+           d > 10000000  ? '#ec2600' :
+     						'none' ;
 }
 
 // JQuery to grab geoJson layers and plot them
@@ -31,9 +30,9 @@ $.getJSON("geojson/startupsus.geojson", function (data) {
 	var startupPointToLayer = function (feature, latlng){
 
 		var startupMarker = L.circle(latlng, 30000, {
-			stroke: '#3300ff',
+			stroke: false,
 			fillColor: getColor(feature.properties.funding_total_usd), 
-			fillOpacity: 0.8
+			fillOpacity: 0.9
 		});
 		return startupMarker
 	    }
