@@ -36,7 +36,7 @@
 		<!-- HEATMAP -->
 		<div id="heatmap">
 			<div class="map-headline">
-				<p>The following heatmap represents the accumulation of US Startups worth over $100M USD over the last 50 years.</p>
+				<p>The following heatmap represents the accumulation of US Startups worth over $10M USD over the last 50 years.</p>
 			</div>
 			<iframe width="100%" height="800px" frameborder="0" src="https://savi.cartodb.com/u/jplata/viz/c9df8122-d294-11e5-9cfd-0e5db1731f59/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
 		</div> <!-- END OF HEATMAP -->
